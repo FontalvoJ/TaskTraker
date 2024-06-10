@@ -1,0 +1,37 @@
+.ezy__signup14 {
+    /* Agregamos un máximo de altura para evitar el scroll */
+    max-height: 100vh;
+    overflow-y: hidden;
+  }
+  
+  .ezy__signup14.container {
+    /* Reducimos el padding para que el formulario sea más pequeño */
+    padding: 2rem;
+  }
+  
+  .ezy__signup14.bg-white {
+    /* Reducimos el padding y la sombra para que el formulario sea más pequeño */
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ezy__signup14 form {
+    /* Reducimos el tamaño de los inputs y botones */
+    font-size: 0.875rem;
+  }
+  
+  .ezy__signup14 input[type="text"],
+  .ezy__signup14 input[type="email"],
+  .ezy__signup14 input[type="pass"] {
+    /* Reducimos el tamaño de los inputs */
+    height: 2.5rem;
+    padding: 0.5rem;
+  }
+  
+  .ezy__signup14 button[type="submit"] {
+    /* Reducimos el tamaño del botón */
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  
