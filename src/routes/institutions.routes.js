@@ -5,16 +5,16 @@ import * as institutionCtrl from "../controllers/institutions.controller";
 
 const router = Router();
 
-// Get all students (admin and institutions)
-router.get("/", [authJwt.verifyToken, validateRoles('admin', 'institution')], institutionCtrl.getInstitutions);
+// Get all intitution (admin)
+router.get("/", [authJwt.verifyToken, validateRoles('admin')], institutionCtrl.getInstitutions);
 
-// Get a student by ID (admin and institutions)
-router.get("/:studentId", [authJwt.verifyToken, validateRoles('admin', 'institution')], institutionCtrl.getInstitutionById);
+// Get a intitution by ID (admin)
+router.get("/intitutionId", [authJwt.verifyToken, validateRoles('admin')], institutionCtrl.getInstitutionById);
 
-// Update a student by ID (only institution role)
-router.put("/:studentId", [authJwt.verifyToken, validateRoles('institution')], institutionCtrl.updateInstitutionById);
+// Update a intitution by ID (only institution role)
+router.put("/:intitutionId", [authJwt.verifyToken, validateRoles('institution')], institutionCtrl.updateInstitutionById);
 
-// Delete a student by ID (admin and institutions)
-router.delete("/:studentId", [authJwt.verifyToken, validateRoles('admin', 'institution')], institutionCtrl.deleteInstitutionById);
+// Delete a intitution by ID (admin and institutions)
+router.delete("/:intitutionId", [authJwt.verifyToken, validateRoles('admin')], institutionCtrl.deleteInstitutionById);
 
 export default router;

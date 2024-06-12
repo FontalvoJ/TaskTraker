@@ -8,7 +8,7 @@ const router = Router();
 // Get all teachers (only accessible to admin and institution)
 router.get("/", [authJwt.verifyToken, validateRoles('admin', 'institution')], teacherCtrl.getTeachers);
 
-// Get a teacher by ID (accessible to admin and institution)
+// Get teacher by ID (accessible to admin and institution)
 router.get("/:teacherId", [authJwt.verifyToken, validateRoles('admin', 'institution')], teacherCtrl.getTeacherById);
 
 // Update a teacher by ID (only the teacher themselves)
