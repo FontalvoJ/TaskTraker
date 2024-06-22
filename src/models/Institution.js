@@ -1,10 +1,25 @@
 import { Schema, model } from "mongoose";
-import bycrypt from 'bcryptjs';
-
+import bcrypt from 'bcryptjs';
 
 const institutionSchema = new Schema(
   {
-    name: {
+    institutionName: {
+      type: String,
+      required: true,
+    },
+    nit: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    contact: {
       type: String,
       required: true,
     },
@@ -30,14 +45,13 @@ const institutionSchema = new Schema(
   }
 );
 
+institutionSchema.statics.encryptPassword = async function(password) {
+  const salt = await bcrypt.genSalt(10);
+  return await bcrypt.hash(password, salt);
+};
 
-institutionSchema.statics.encryptPassword = async(password) => {
-  const salt = await bycrypt.genSalt(10)
-  return await bycrypt.hash(password, salt)
-}
-institutionSchema.statics.comparePassword = async(password, receivedPassword) => {
-  return await bycrypt.comparePassword(password, receivedPassword)
-}
+institutionSchema.statics.comparePassword = async function(password, receivedPassword) {
+  return await bcrypt.compare(password, receivedPassword);
+};
 
-
-export default model('Institution',institutionSchema);
+export default model('Institution', institutionSchema);

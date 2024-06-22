@@ -40,45 +40,63 @@ export const signUpAdmin = async (req, res) => {
 
 export const signUp = async (req, res) => {
   try {
-    const { name, email, password, roles } = req.body;
+    const { institutionName, nit, address, city, contact, email, password, roles } = req.body;
 
+    
+    const existingInstitution = await Institution.findOne({ email });
+    if (existingInstitution) {
+      return res.status(400).json({ error: 'El email ya está registrado' });
+    }
+
+   
     const encryptedPassword = await Institution.encryptPassword(password);
 
-    // Crear un nuevo usuario con la contraseña encriptada
+    
     const newInstitution = new Institution({
-      name,
+      institutionName,
+      nit,
+      address,
+      city,
+      contact,
       email,
       password: encryptedPassword,
     });
 
-    // Asignar roles
-    if (roles) {
+
+    if (roles && roles.length > 0) {
       const foundRoles = await Role.find({
-        name: {
-          $in: roles,
-        },
+        institutionName: { $in: roles },
       });
+
+      if (foundRoles.length !== roles.length) {
+        // Algunos roles no fueron encontrados
+        const foundRoleNames = foundRoles.map(role => role.institutionName);
+        const notFoundRoles = roles.filter(role => !foundRoleNames.includes(role));
+        return res.status(400).json({ error: `No se encontraron los roles: ${notFoundRoles.join(', ')}` });
+      }
+
       newInstitution.roles = foundRoles.map((role) => role._id);
     } else {
-      // Si no se especifican roles, asignar el rol "institution"
-      const role = await Role.findOne({
-        name: "institution",
-      });
-      newInstitution.roles = [role._id];
+   
+      const defaultRole = await Role.findOne({ name: 'institution' });
+
+      if (!defaultRole) {
+        return res.status(400).json({ error: 'No se encontró un rol por defecto' });
+      }
+      newInstitution.roles = [defaultRole._id];
     }
 
-    // Guardar el nuevo usuario en la base de datos
+   
     const savedInstitution = await newInstitution.save();
 
-
-    // Responder con el token
+   
     res.status(201).json({
-      message: "Create Institution Success",
+      message: 'Institución creada exitosamente',
     });
   } catch (error) {
-    console.error("Error en el registro de usuario:", error);
+    console.error('Error en el registro de la institución:', error);
     res.status(500).json({
-      error: "Error en el registro de usuario",
+      error: 'Error en el registro de la institución',
     });
   }
 };
