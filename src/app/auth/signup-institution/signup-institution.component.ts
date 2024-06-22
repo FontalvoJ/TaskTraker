@@ -10,10 +10,11 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 export class SignupInstitutionComponent implements OnInit {
 
   public formLoginInstitution: FormGroup;
-  isAlertVisible: boolean = true;
+  isAlertVisible: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) { this.formLoginInstitution = this.formBuilder.group({});
-}
+  constructor(private formBuilder: FormBuilder) {
+    this.formLoginInstitution = this.formBuilder.group({});
+  }
 
   ngOnInit(): void {
     this.formLoginInstitution = this.formBuilder.group({
@@ -28,9 +29,21 @@ export class SignupInstitutionComponent implements OnInit {
   }
 
   send(): void {
+    if (this.formLoginInstitution.invalid) {
+      this.isAlertVisible = true;
+   
+      this.formLoginInstitution.markAllAsTouched();
+
+      setTimeout(() => {
+        this.closeAlert();
+      }, 2000); 
+      return;
+    }
+
+    this.isAlertVisible = false;
     console.log(this.formLoginInstitution.value);
-    // Aquí se puede agregar la lógica para enviar el formulario
   }
+
   closeAlert() {
     this.isAlertVisible = false;
   }
