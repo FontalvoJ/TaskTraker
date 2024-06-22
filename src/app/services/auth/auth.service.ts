@@ -8,27 +8,29 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private URL = 'http://localhost:3000/api';
+  private URL_CREDENCIAIS = 'https://api-node-tasktraker.onrender.com/api/auth';
 
+  
   constructor(
     private http: HttpClient,
     private router:Router) { 
   
   }
 
+
+  //Register Institution
   signUp(user: { email: string; password: string; }) {
-    return this.http.post<any>(this.URL + '/signup', user);
+    return this.http.post<any>(this.URL_CREDENCIAIS + '/signup', user);
   }
 
   signIn(user: { email: string; password: string; }) {
-    return this.http.post<any>(this.URL + '/signin', user);
+    return this.http.post<any>(this.URL_CREDENCIAIS + '/signin', user);
   }
 
   loggedIn() {
     return !!localStorage.getItem('token');
   }
 
-  
   
   getToken() {
     return localStorage.getItem('token');
