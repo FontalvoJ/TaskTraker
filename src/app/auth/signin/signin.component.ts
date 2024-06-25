@@ -22,13 +22,25 @@ export class SigninComponent {
   signIn() {
     this.authService.signIn(this.user)
       .subscribe(
-        (res) => {
+        (res: any) => {
           console.log(res);
           localStorage.setItem('token', res.token);
-          this.router.navigate(['/list-teachers']);
+          
+          // Redirige dependiendo del rol del usuario
+          if (res.user && res.user.role === 'teacher') {
+            this.router.navigate(['/dashboard-teacher']);
+          } else if (res.user && res.user.role === 'student') {
+            this.router.navigate(['/dashboard-student']);
+          } else if (res.user && res.user.role === 'institution') {
+            this.router.navigate(['/dashboard-institution']);
+          } else {
+            
+            this.router.navigate(['/home']);
+          }
         },
         (err) => {
           console.log(err);
+          // Manejo de errores
         }
       );
   }

@@ -47,7 +47,7 @@ export class SignupInstitutionComponent implements OnInit {
     this.authService.signUp(this.formLoginInstitution.value).subscribe(
       res => {
         console.log(res);
-        this.router.navigate(['/home']); // Redirige a una ruta de éxito después del registro
+        this.router.navigate(['/register-institution']); 
       },
       err => {
         console.error(err);

@@ -23,6 +23,16 @@ export class AuthService {
     return this.http.post<any>(this.URL_CREDENCIAIS + '/signup', user);
   }
 
+  //Register Teacher
+  signUpTeacher(user: { email: string; password: string; }) {
+    return this.http.post<any>(this.URL_CREDENCIAIS + '/signupTeacher', user);
+  }
+
+  //Register Student
+  signUpStudent(user: { email: string; password: string; }) {
+    return this.http.post<any>(this.URL_CREDENCIAIS + '/signupStudent', user);
+  }
+  
   signIn(user: { email: string; password: string; }) {
     return this.http.post<any>(this.URL_CREDENCIAIS + '/signin', user);
   }
