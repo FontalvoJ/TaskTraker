@@ -6,7 +6,9 @@ import * as studentCtrl from "../controllers/students.controllers";
 const router = Router();
 
 // Get all students (admin, teacher, and institutions)
-router.get("/", [authJwt.verifyToken, validateRoles('admin', 'institution', 'teacher')], studentCtrl.getStudents);
+//router.get("/", [authJwt.verifyToken, validateRoles('admin', 'institution', 'teacher')], studentCtrl.getStudents);
+router.get("/", studentCtrl.getStudents);
+
 
 // Get a student by ID (admin and teacher)
 router.get("/:studentId", [authJwt.verifyToken, validateRoles('admin', 'institution', 'teacher')], studentCtrl.getStudentById);

@@ -6,7 +6,9 @@ import * as teacherCtrl from "../controllers/teacher.controllers";
 const router = Router();
 
 // Get all teachers (only accessible to admin and institution)
-router.get("/", [authJwt.verifyToken, validateRoles('admin', 'institution')], teacherCtrl.getTeachers);
+//router.get("/", [authJwt.verifyToken, validateRoles('admin', 'institution')], teacherCtrl.getTeachers);
+router.get("/", teacherCtrl.getTeachers);
+
 
 // Get teacher by ID (accessible to admin and institution)
 router.get("/:teacherId", [authJwt.verifyToken, validateRoles('admin', 'institution')], teacherCtrl.getTeacherById);

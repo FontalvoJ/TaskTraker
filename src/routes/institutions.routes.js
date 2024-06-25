@@ -6,7 +6,8 @@ import * as institutionCtrl from "../controllers/institutions.controller";
 const router = Router();
 
 // Get all intitution (admin)
-router.get("/", [authJwt.verifyToken, validateRoles('admin')], institutionCtrl.getInstitutions);
+//router.get("/", [authJwt.verifyToken, validateRoles('admin')], institutionCtrl.getInstitutions);
+router.get("/", institutionCtrl.getInstitutions);
 
 // Get a intitution by ID (admin)
 router.get("/intitutionId", [authJwt.verifyToken, validateRoles('admin')], institutionCtrl.getInstitutionById);
