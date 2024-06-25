@@ -1,30 +1,25 @@
-<div *ngIf="isAlertVisible && formLoginInstitution.invalid && formLoginInstitution.touched" id="alert-border-5"
-  class="flex items-center p-4 border-t-4 border-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-600"
-  role="alert">
-  <svg class="flex-shrink-0 w-4 h-4 dark:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-    fill="currentColor" viewBox="0 0 20 20">
-    <path
-      d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-  </svg>
-  <div class="ms-3 text-sm font-medium text-gray-800 dark:text-gray-300">
-    All fields must be filled out. Please make sure all form fields are completed before proceeding. The information
-    provided is essential to process your request correctly and avoid any delays. ⚠️ <a
-      class="font-semibold underline hover:text-gray-800 hover:no-underline dark:text-gray-300"></a>
-  </div>
-</div>
-
-
-
-
 
 <section
   class="ezy__signup14 light flex items-center justify-center py-14 md:py-24 text-black bg-cover bg-right bg-no-repeat relative"
   style="background-image: url(https://images.pexels.com/photos/5825592/pexels-photo-5825592.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)">
 
-
+  <div class="container px-10 mx-auto">
   
-  <div class="container px-4 mx-auto">
-
+    <div *ngIf="isAlertVisible && formLoginInstitution.invalid && formLoginInstitution.touched" id="alert-border-5"
+    class="flex items-center p-4 border-t-4 border-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-600"
+    role="alert">
+    <svg class="flex-shrink-0 w-4 h-4 dark:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor" viewBox="0 0 20 20">
+      <path
+        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+    </svg>
+    <div class="ms-3 text-sm font-medium text-gray-800 dark:text-gray-300">
+      All fields must be filled out. Please make sure all form fields are completed before proceeding. The information
+      provided is essential to process your request correctly and avoid any delays. ⚠️ <a
+        class="font-semibold underline hover:text-gray-800 hover:no-underline dark:text-gray-300"></a>
+    </div>
+  </div>
+  
     <div class="flex justify-center">
       <div class="w-full md:w-2/3">
         <div class="bg-white shadow-xl p-4">
@@ -39,7 +34,7 @@
             <div class="w-full lg:w-1/2 mt-6 lg:mt-0 lg:pl-6">
               <div class="flex flex-col justify-center items-center text-center h-full p-2">
                 <h2 class="text-[26px] leading-none font-bold mb-2">Register Your Institution and Join Us!</h2>
-                <form class="w-full mt-6" (submit)="send()">
+                <form class="w-full mt-6" [formGroup]="formLoginInstitution" (ngSubmit)="send()">
                   <div class="w-full relative mb-4">
                     <input type="text"
                       class="border-b border-black focus:outline-none focus:border-blue-600 py-2 text-sm w-full"
@@ -162,13 +157,17 @@
     </div>
   </div>
 
-  <div *ngIf="isAlertVisible" class="max-w-sm mx-auto bg-green-200 border-green-600 text-green-600 border-l-4 p-4 mt-4" role="alert">
-    <p class="font-bold">
-        Success! Registration Completed
-    </p>
-    <p>
-        The institution has been successfully registered.
-    </p>
+
+
+  <div *ngIf="registrationSuccess"
+  class="max-w-sm mx-auto bg-green-200 border-green-600 text-green-600 border-l-4 p-4 mt-4"
+  role="alert">
+  <p class="font-bold">
+    Success! Registration Completed
+  </p>
+  <p>
+    The institution has been successfully registered.
+  </p>
 </div>
 
 </section>

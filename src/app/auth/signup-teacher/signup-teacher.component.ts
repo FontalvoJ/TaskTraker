@@ -12,15 +12,18 @@ import { Router } from "@angular/router";
 export class SignupTeacherComponent implements OnInit {
 
   public formLoginTeacher: FormGroup;
-  isAlertVisible: boolean = false;
+  public isAlertVisible: boolean = false;
+  public loading: boolean = false;
+  public institutions: any[] = [];
+  public selectedInstitution: string = '';
+  public registrationSuccess: boolean = false;
 
-  institutions: any[] = [];
-  selectedInstitution: string = '';
-
-  constructor(private institutionService: InstitutionService,
-              private formBuilder: FormBuilder,
-              private authService: AuthService,
-              private router: Router) {
+  constructor(
+    private institutionService: InstitutionService,
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.formLoginTeacher = this.formBuilder.group({
       name: ['', [Validators.required]],
       asignature: ['', [Validators.required]],
@@ -29,8 +32,6 @@ export class SignupTeacherComponent implements OnInit {
       id_institution: ['', [Validators.required]]
     });
   }
-
-  loading: boolean = false;
 
   ngOnInit(): void {
     this.getInstitutions();
@@ -65,8 +66,12 @@ export class SignupTeacherComponent implements OnInit {
     this.authService.signUpTeacher(this.formLoginTeacher.value).subscribe(
       res => {
         console.log(res);
-        // Redireccionar a la página de inicio
-        this.router.navigate(['/home']);
+        this.registrationSuccess = true;
+        setTimeout(() => {
+          this.registrationSuccess = false;
+          // Redireccionar a la página de inicio
+          this.router.navigate(['/home']);
+        }, 2000);
       },
       err => {
         console.error(err);
@@ -78,7 +83,7 @@ export class SignupTeacherComponent implements OnInit {
     );
   }
 
-  closeAlert() {
+  closeAlert(): void {
     this.isAlertVisible = false;
   }
 }

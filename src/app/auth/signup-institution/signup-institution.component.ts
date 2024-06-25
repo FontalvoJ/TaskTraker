@@ -12,31 +12,30 @@ export class SignupInstitutionComponent implements OnInit {
 
   public formLoginInstitution: FormGroup;
   isAlertVisible: boolean = false;
+  registrationSuccess: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router
   ) {
-    this.formLoginInstitution = this.formBuilder.group({});
+    this.formLoginInstitution = this.formBuilder.group({
+      institutionName: ['', Validators.required],
+      nit: ['', Validators.required],
+      address: ['', Validators.required],
+      city: ['', Validators.required],
+      contact: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+    });
   }
 
   ngOnInit(): void {
-    this.formLoginInstitution = this.formBuilder.group({
-      institutionName: ['', [Validators.required]],
-      nit: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      contact: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-    });
   }
 
   send(): void {
     if (this.formLoginInstitution.invalid) {
       this.isAlertVisible = true;
-      this.formLoginInstitution.markAllAsTouched();
       setTimeout(() => {
         this.closeAlert();
       }, 2000); 
@@ -47,7 +46,13 @@ export class SignupInstitutionComponent implements OnInit {
     this.authService.signUp(this.formLoginInstitution.value).subscribe(
       res => {
         console.log(res);
-        this.router.navigate(['/register-institution']); 
+        this.registrationSuccess = true;
+        setTimeout(() => {
+          this.registrationSuccess = false;
+          //this.router.navigate(['/register-institution']); 
+          this.router.navigate(['/login']); 
+
+        }, 5000); 
       },
       err => {
         console.error(err);
