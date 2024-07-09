@@ -47,10 +47,11 @@ export class SignupInstitutionComponent implements OnInit {
       res => {
         console.log(res);
         this.registrationSuccess = true;
+        this.formLoginInstitution.reset();
         setTimeout(() => {
           this.registrationSuccess = false;
-          //this.router.navigate(['/register-institution']); 
-          this.router.navigate(['/login']); 
+
+          this.router.navigate(['/register-institution']); 
 
         }, 5000); 
       },
@@ -59,7 +60,7 @@ export class SignupInstitutionComponent implements OnInit {
         this.isAlertVisible = true;
         setTimeout(() => {
           this.closeAlert();
-        }, 2000); 
+        }, 1500); 
       }
     );
   }

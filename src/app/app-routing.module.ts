@@ -11,6 +11,7 @@ import { RolsComponent } from './pages/home/rols/rols.component';
 import { ErrorComponent } from './pages/home/error/error.component';
 import { SignupInstitutionComponent } from './auth/signup-institution/signup-institution.component';
 import { SignupTeacherComponent } from './auth/signup-teacher/signup-teacher.component';
+import { SignupStudentComponent } from './auth/signup-student/signup-student.component';
 import { AuthGuard } from './auth.guard';
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'error', component: ErrorComponent },
   { path: 'register-institution', component: SignupInstitutionComponent},
   { path: 'register-teacher', component: SignupTeacherComponent},
+  { path: 'register-student', component: SignupStudentComponent},
 
 
 

@@ -67,10 +67,10 @@ export class SignupTeacherComponent implements OnInit {
       res => {
         console.log(res);
         this.registrationSuccess = true;
+        this.formLoginTeacher.reset();
         setTimeout(() => {
           this.registrationSuccess = false;
-          // Redireccionar a la página de inicio
-          this.router.navigate(['/home']);
+          this.router.navigate(['/register-teacher']);
         }, 2000);
       },
       err => {
