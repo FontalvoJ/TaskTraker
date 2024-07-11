@@ -22,27 +22,44 @@ export class SigninComponent {
   signIn() {
     this.authService.signIn(this.user)
       .subscribe(
-        (res: any) => {
-          console.log(res);
-          localStorage.setItem('token', res.token);
-          
-          // Redirige dependiendo del rol del usuario
-          if (res.user && res.user.role === 'teacher') {
-            this.router.navigate(['/dashboard-teacher']);
-          } else if (res.user && res.user.role === 'student') {
-            this.router.navigate(['/dashboard-student']);
-          } else if (res.user && res.user.role === 'institution') {
-            this.router.navigate(['/dashboard-institution']);
+        (res: { token: string, role: string }) => {
+
+          if (res && res.token) {
+            localStorage.setItem('token', res.token);
+
+            if (res.role) {
+              localStorage.setItem('role', res.role); 
+
+              switch (res.role) {
+                case 'teacher':
+                  this.router.navigate(['/dashboard-teacher']);
+                  break;
+                case 'student':
+                  this.router.navigate(['/dashboard-student']);
+                  break;
+                case 'institution':
+                  this.router.navigate(['/dashboard-institution']);
+                  break;
+                case 'admin':
+                  this.router.navigate(['/dashboard-admin']);
+                  break;
+                default:
+                  this.router.navigate(['/home']);
+                  break;
+              }
+            } else {
+              console.error('El rol del usuario no está definido.');
+              this.router.navigate(['/home']);
+            }
           } else {
-            
+            console.error('Token o respuesta de usuario no válida.');
             this.router.navigate(['/home']);
           }
         },
         (err) => {
-          console.log(err);
-          // Manejo de errores
+          console.log(err); 
+          alert('Error al iniciar sesión: ' + (err.error?.message || 'Inténtalo de nuevo más tarde.'));
         }
       );
   }
-
 }

@@ -65,7 +65,6 @@ export class SignupStudentComponent implements OnInit {
     this.isAlertVisible = false;
     this.authService.signUpStudent(this.formLoginStudent.value).subscribe(
       res => {
-        console.log(res);
         this.registrationSuccess = true;
         this.formLoginStudent.reset();
         setTimeout(() => {

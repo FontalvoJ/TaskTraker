@@ -12,6 +12,7 @@ import { ErrorComponent } from './pages/home/error/error.component';
 import { SignupInstitutionComponent } from './auth/signup-institution/signup-institution.component';
 import { SignupTeacherComponent } from './auth/signup-teacher/signup-teacher.component';
 import { SignupStudentComponent } from './auth/signup-student/signup-student.component';
+import {  DasboardInstitutionComponent } from './pages/institution/dasboard-institution/dasboard-institution.component';
 import { AuthGuard } from './auth.guard';
 
 
@@ -19,10 +20,10 @@ import { AuthGuard } from './auth.guard';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'error', component: ErrorComponent },
+
   { path: 'register-institution', component: SignupInstitutionComponent},
   { path: 'register-teacher', component: SignupTeacherComponent},
   { path: 'register-student', component: SignupStudentComponent},
-
 
 
   { path: 'academic-programs', component: AcaProgrsComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'login', component: SigninComponent },
   { path: 'register', component: SignupInstitutionComponent },
 
+  { path: 'dashboard-institution', component: DasboardInstitutionComponent, canActivate: [AuthGuard] },
   { path: 'list-teachers', component: ListTeachersComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];

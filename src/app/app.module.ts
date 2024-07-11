@@ -17,8 +17,8 @@ import { AdmissionsComponent } from './pages/home/admissions/admissions.componen
 import { AcaProgrsComponent } from './pages/home/aca-progrs/aca-progrs.component';
 
 //Nabvars de cada Rol
-import { NavbarHomeComponent } from './pages/Navbars/navbar-vis/navbar-home/navbar-home.component';
-import { NavbarVisComponent } from './pages/Navbars/navbar-vis/navbar-vis.component';
+import { NavbarHomeComponent } from './pages/Navbars/navbar-home/navbar-home.component';
+
 
 
 import { AuthGuard } from './auth.guard';
@@ -27,6 +27,9 @@ import { SignupTeacherComponent } from './auth/signup-teacher/signup-teacher.com
 import { SignupInstitutionComponent } from './auth/signup-institution/signup-institution.component';
 import { SignupStudentComponent } from './auth/signup-student/signup-student.component';
 import { ErrorComponent } from './pages/home/error/error.component';
+import { DasboardInstitutionComponent } from './pages/institution/dasboard-institution/dasboard-institution.component';
+import { NavbarInstitutionComponent } from './pages/Navbars/navbar-institution/navbar-institution.component';
+
 
 
 
@@ -35,7 +38,6 @@ import { ErrorComponent } from './pages/home/error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarVisComponent,
     SigninComponent,
     ListTeachersComponent,
     HomeComponent,
@@ -47,6 +49,8 @@ import { ErrorComponent } from './pages/home/error/error.component';
     SignupInstitutionComponent,
     SignupStudentComponent,
     ErrorComponent,
+    DasboardInstitutionComponent,
+    NavbarInstitutionComponent
 
     
   ],

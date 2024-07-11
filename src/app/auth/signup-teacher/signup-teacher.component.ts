@@ -65,7 +65,6 @@ export class SignupTeacherComponent implements OnInit {
     this.isAlertVisible = false;
     this.authService.signUpTeacher(this.formLoginTeacher.value).subscribe(
       res => {
-        console.log(res);
         this.registrationSuccess = true;
         this.formLoginTeacher.reset();
         setTimeout(() => {
