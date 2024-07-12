@@ -13,7 +13,7 @@ router.post('/signupAdmin', authCtrl.signUpAdmin);
 router.post('/signupTeacher', authCtrl.signUpTeacher);
 
 // Route to sign up a new student
-router.post('/signupStudent', authCtrl.signUpStudent);
+router.post('/signupStudent', authCtrl.signupStudents);
 
 // Route to sign in
 router.post('/signin', authCtrl.signIn);

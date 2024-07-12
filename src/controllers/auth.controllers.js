@@ -145,7 +145,7 @@ export const signUpTeacher = async (req, res) => {
   }
 };
 
-export const signupStudent = async (req, res) => {
+export const signupStudents = async (req, res) => {
   try {
     const { name, email, password, id_institution, roles } = req.body;
 
