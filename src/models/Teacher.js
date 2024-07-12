@@ -22,7 +22,7 @@ const teacherSchema = new Schema(
     },
     id_institution: {
       type: Schema.Types.ObjectId,
-      ref: "User", 
+      ref: "Institution", 
       required: true,
     },
     roles: [

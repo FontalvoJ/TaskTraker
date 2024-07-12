@@ -9,6 +9,8 @@ const router = Router();
 //router.get("/", [authJwt.verifyToken, validateRoles('admin', 'institution')], teacherCtrl.getTeachers);
 router.get("/", teacherCtrl.getTeachers);
 
+//Get TeacherByIdInstitution
+router.get('/institution/:id_institucion/teachers', getTeachersByInstitutionId);
 
 // Get teacher by ID (accessible to admin and institution)
 router.get("/:teacherId", [authJwt.verifyToken, validateRoles('admin', 'institution')], teacherCtrl.getTeacherById);
