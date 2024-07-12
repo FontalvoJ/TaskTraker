@@ -10,12 +10,12 @@ const router = Router();
 router.get("/", institutionCtrl.getInstitutions);
 
 // Get a intitution by ID (admin)
-router.get("/intitutionId", [authJwt.verifyToken, validateRoles('admin')], institutionCtrl.getInstitutionById);
+router.get("/institutionId", [authJwt.verifyToken, validateRoles('admin')], institutionCtrl.getInstitutionById);
 
 // Update a intitution by ID (only institution role)
-router.put("/:intitutionId", [authJwt.verifyToken, validateRoles('institution')], institutionCtrl.updateInstitutionById);
+router.put("/:institutionId", [authJwt.verifyToken, validateRoles('institution')], institutionCtrl.updateInstitutionById);
 
 // Delete a intitution by ID (admin and institutions)
-router.delete("/:intitutionId", [authJwt.verifyToken, validateRoles('admin')], institutionCtrl.deleteInstitutionById);
+router.delete("/:institutionId", [authJwt.verifyToken, validateRoles('admin')], institutionCtrl.deleteInstitutionById);
 
 export default router;
