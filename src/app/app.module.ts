@@ -18,8 +18,7 @@ import { AcaProgrsComponent } from './pages/home/aca-progrs/aca-progrs.component
 
 //Nabvars de cada Rol
 import { NavbarHomeComponent } from './pages/Navbars/navbar-home/navbar-home.component';
-
-
+import { NavbarInstitutionComponent } from './pages/Navbars/navbar-institution/navbar-institution.component';
 
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor/token-interceptor.service';
@@ -28,7 +27,7 @@ import { SignupInstitutionComponent } from './auth/signup-institution/signup-ins
 import { SignupStudentComponent } from './auth/signup-student/signup-student.component';
 import { ErrorComponent } from './pages/home/error/error.component';
 import { DasboardInstitutionComponent } from './pages/institution/dasboard-institution/dasboard-institution.component';
-import { NavbarInstitutionComponent } from './pages/Navbars/navbar-institution/navbar-institution.component';
+
 
 
 

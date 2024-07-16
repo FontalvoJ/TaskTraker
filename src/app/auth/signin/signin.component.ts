@@ -22,14 +22,16 @@ export class SigninComponent {
   signIn() {
     this.authService.signIn(this.user)
       .subscribe(
-        (res: { token: string, role: string }) => {
-
+        (res: { token: string, role: string, id: string }) => {
+  
           if (res && res.token) {
             localStorage.setItem('token', res.token);
+            localStorage.setItem('userId', res.id); 
 
             if (res.role) {
-              localStorage.setItem('role', res.role); 
 
+              localStorage.setItem('role', res.role); 
+  
               switch (res.role) {
                 case 'teacher':
                   this.router.navigate(['/dashboard-teacher']);
@@ -48,18 +50,20 @@ export class SigninComponent {
                   break;
               }
             } else {
-              console.error('El rol del usuario no está definido.');
+              console.error('User role is not defined.');
               this.router.navigate(['/home']);
             }
           } else {
-            console.error('Token o respuesta de usuario no válida.');
+            console.error('Invalid token or user response.');
             this.router.navigate(['/home']);
           }
         },
         (err) => {
           console.log(err); 
-          alert('Error al iniciar sesión: ' + (err.error?.message || 'Inténtalo de nuevo más tarde.'));
+          alert('Error logging in: ' + (err.error?.message || 'Please try again later.'));
         }
       );
   }
+  
+  
 }

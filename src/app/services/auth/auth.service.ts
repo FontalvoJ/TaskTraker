@@ -34,9 +34,10 @@ export class AuthService {
   }
   
    //Login
-  signIn(user: { email: string; password: string; }) {
-    return this.http.post<{ token: string, role: string }>(this.URL_CREDENCIAIS + '/signin', user);
+   signIn(user: { email: string; password: string; }) {
+    return this.http.post<{ token: string, role: string, id: string }>(this.URL_CREDENCIAIS + '/signin', user);
   }
+  
 
   loggedIn() {
     return !!localStorage.getItem('token');
