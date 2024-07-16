@@ -222,15 +222,20 @@ export const signIn = async (req, res) => {
     }
 
     let role = null;
+    let name = '';
 
     if (user instanceof Institution) {
       role = "institution";
+      name = user.institutionName;
     } else if (user instanceof Teacher) {
       role = "teacher";
+      name = user.name;
     } else if (user instanceof Student) {
       role = "student";
+      name = user.name; 
     } else if (user instanceof Admin) {
       role = "admin";
+      name = user.name; 
     }
 
     const token = jwt.sign(
@@ -248,7 +253,7 @@ export const signIn = async (req, res) => {
       token,
       role,
       id: user._id.toString(),
-      name: user.name 
+      name: name 
     });
   } catch (error) {
     console.error(error);
@@ -257,6 +262,7 @@ export const signIn = async (req, res) => {
     });
   }
 };
+
 
 
 export default {
