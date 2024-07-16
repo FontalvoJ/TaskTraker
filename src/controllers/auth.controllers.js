@@ -242,6 +242,7 @@ export const signIn = async (req, res) => {
       {
         id: user._id,
         role: role,
+        id: user._id 
       },
       config.SECRET,
       {
