@@ -247,7 +247,8 @@ export const signIn = async (req, res) => {
     res.json({
       token,
       role,
-      id: user._id.toString()
+      id: user._id.toString(),
+      name: user.name 
     });
   } catch (error) {
     console.error(error);
