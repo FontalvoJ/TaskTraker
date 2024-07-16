@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
@@ -6,8 +6,20 @@ import { AuthService } from '../../../services/auth/auth.service';
   templateUrl: './navbar-institution.component.html',
   styleUrls: ['./navbar-institution.component.css']
 })
+export class NavbarInstitutionComponent implements OnInit {
 
-export class NavbarInstitutionComponent {
+  userName: string | null = null;
 
   constructor(public authService: AuthService) { }
+
+  ngOnInit() {
+ 
+    this.userName = localStorage.getItem('userName');
+  }
+
+
+  logOut() {
+    this.authService.logout();
+    this.userName = null; 
+  }
 }

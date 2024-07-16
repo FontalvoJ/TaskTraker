@@ -22,16 +22,16 @@ export class SigninComponent {
   signIn() {
     this.authService.signIn(this.user)
       .subscribe(
-        (res: { token: string, role: string, id: string }) => {
-  
+        (res: { token: string, role: string, id: string, name: string }) => {
+
           if (res && res.token) {
             localStorage.setItem('token', res.token);
             localStorage.setItem('userId', res.id); 
+            localStorage.setItem('userName', res.name);
 
             if (res.role) {
-
               localStorage.setItem('role', res.role); 
-  
+
               switch (res.role) {
                 case 'teacher':
                   this.router.navigate(['/dashboard-teacher']);
@@ -64,6 +64,4 @@ export class SigninComponent {
         }
       );
   }
-  
-  
 }

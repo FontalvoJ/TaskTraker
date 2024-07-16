@@ -41,7 +41,10 @@
               </ng-container>
               <ng-template #loggedIn>
                 <li>
-                  <button (click)="authService.logout()" class="border border-black hover:bg-black hover:text-white rounded-lg px-4 py-1.5">
+                  <span>Welcome, {{ userName }}!</span>
+                </li>
+                <li>
+                  <button (click)="logOut()" class="border border-black hover:bg-black hover:text-white rounded-lg px-4 py-1.5">
                     LogOut
                   </button>
                 </li>
