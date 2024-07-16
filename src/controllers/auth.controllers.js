@@ -189,14 +189,12 @@ export const signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Validación de entrada
     if (!email || !password) {
       return res.status(400).json({
         message: "Email and password are required",
       });
     }
 
-    // Buscar usuario por email en todas las colecciones
     let user = await Institution.findOne({ email }).populate("roles")
       || await Teacher.findOne({ email }).populate("roles")
       || await Student.findOne({ email }).populate("roles")
@@ -217,14 +215,12 @@ export const signIn = async (req, res) => {
       });
     }
 
-    // Verificar que el usuario tenga roles asignados
     if (!user.roles || user.roles.length === 0) {
       return res.status(400).json({
         message: "User roles not found",
       });
     }
 
-    // Obtener el rol del usuario
     let role = null;
 
     if (user instanceof Institution) {
@@ -237,22 +233,21 @@ export const signIn = async (req, res) => {
       role = "admin";
     }
 
-    // Generar el token JWT
     const token = jwt.sign(
       {
-        id: user._id,
+        id: user._id.toString(),
         role: role,
-        id: user._id.toString()
       },
       config.SECRET,
       {
-        expiresIn: '24h', // 24 horas de expiración
+        expiresIn: '24h',
       }
     );
 
     res.json({
       token,
       role,
+      id: user._id.toString()
     });
   } catch (error) {
     console.error(error);
@@ -261,6 +256,7 @@ export const signIn = async (req, res) => {
     });
   }
 };
+
 
 export default {
   signUpAdmin,
