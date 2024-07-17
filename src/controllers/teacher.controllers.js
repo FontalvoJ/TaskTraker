@@ -54,13 +54,13 @@ export const deleteTeacherById = async (req, res) => {
 };
 
 export const getTeachersByInstitutionId = async (req, res) => {
-    const { id_institucion } = req.params;
+    const { id_institution } = req.params;
     
     try {
-        const teachers = await Teacher.find({ id_institucion });
+        const teachers = await Teacher.find({ id_institution });
         res.status(200).json({ success: true, data: teachers });
     } catch (error) {
-        console.error(`Error fetching teachers for institution with ID ${id_institucion}:`, error);
+        console.error(`Error fetching teachers for institution with ID ${id_institution}:`, error);
         res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 };
