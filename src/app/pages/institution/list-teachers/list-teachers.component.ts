@@ -8,12 +8,16 @@ import { TeacherService } from 'src/app/services/teacher.service';
 })
 export class ListTeachersComponent implements OnInit {
 
-  teachers: any[] = []; 
+  teachers: any[] = [];
+  paginatedTeachers: any[] = []; 
+  filteredTeachers: any[] = [];
+  currentPage: number = 1; 
+  itemsPerPage: number = 5;  
+  searchTerm: string = '';
 
   constructor(private teacherService: TeacherService) { }
 
   ngOnInit() {
-   
     const institutionId = localStorage.getItem('userId');
     const role = localStorage.getItem('role');
 
@@ -25,6 +29,8 @@ export class ListTeachersComponent implements OnInit {
         (res) => {
           if (res.success) {
             this.teachers = res.data;
+            this.filteredTeachers = [...this.teachers];
+            this.updatePaginatedTeachers(); 
           } else {
             console.error('Failed to fetch teachers');
           }
@@ -36,6 +42,34 @@ export class ListTeachersComponent implements OnInit {
     } else {
       console.error('User is not an institution or institutionId is missing.');
     }
+  }
+
+  updatePaginatedTeachers() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedTeachers = this.filteredTeachers.slice(startIndex, endIndex);
+  }
+
+  goToPreviousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedTeachers();
+    }
+  }
+
+  goToNextPage() {
+    if (this.currentPage * this.itemsPerPage < this.filteredTeachers.length) {
+      this.currentPage++;
+      this.updatePaginatedTeachers();
+    }
+  }
+
+  applySearch() {
+    this.filteredTeachers = this.teachers.filter(teacher => 
+      teacher.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    this.currentPage = 1; // Reiniciar la página actual al realizar una búsqueda
+    this.updatePaginatedTeachers();
   }
 
   editTeacher(teacher: any) {

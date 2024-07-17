@@ -17,4 +17,8 @@ export class TeacherService {
     getTeachersByInstitutionId(id_institution: string): Observable<any> {
       return this.http.get<any>(`${this.URL}/teachers/institution/${id_institution}`);
     }
+
+    deleteTeacherById(teacherId: string): Observable<any> {
+      return this.http.delete<any>(`${this.URL}/teachers/${teacherId}`);
+    }
 }
