@@ -68,17 +68,17 @@ export class ListTeachersComponent implements OnInit {
     this.filteredTeachers = this.teachers.filter(teacher => 
       teacher.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
-    this.currentPage = 1; // Reiniciar la página actual al realizar una búsqueda
+    this.currentPage = 1;
     this.updatePaginatedTeachers();
   }
 
   editTeacher(teacher: any) {
-    // Placeholder for edit functionality
+   
     console.log('Edit teacher:', teacher);
   }
 
   deleteTeacher(teacher: any) {
-    // Placeholder for delete functionality
+   
     console.log('Delete teacher:', teacher);
   }
 }
