@@ -17,10 +17,10 @@
                 <a class="px-4 opacity-50 hover:opacity-100" routerLink="/projects">Projects</a>
               </li>
               <li class="">
-                <a class="px-4 opacity-50 hover:opacity-100" routerLink="/accountsIns">Institutions</a>
+                <a class="px-4 opacity-50 hover:opacity-100" routerLink="/accountsIns">Students</a>
               </li>
               <li class="">
-                <a class="px-4 opacity-50 hover:opacity-100" routerLink="/list-teachers">Teachers</a>
+                <a class="px-4 opacity-50 hover:opacity-100" routerLink="/teachers">Teachers</a>
               </li>
               
   
@@ -41,7 +41,10 @@
               </ng-container>
               <ng-template #loggedIn>
                 <li>
-                  <button (click)="authService.logout()" class="border border-black hover:bg-black hover:text-white rounded-lg px-4 py-1.5">
+                  <span>Welcome, {{ userName }}!</span>
+                </li>
+                <li>
+                  <button (click)="logOut()" class="border border-black hover:bg-black hover:text-white rounded-lg px-4 py-1.5">
                     LogOut
                   </button>
                 </li>
