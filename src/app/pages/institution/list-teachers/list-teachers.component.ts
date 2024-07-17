@@ -8,7 +8,7 @@ import { TeacherService } from 'src/app/services/teacher.service';
 })
 export class ListTeachersComponent implements OnInit {
 
-  teachers: any[] = []; // Propiedad para almacenar los profesores
+  teachers: any[] = []; 
 
   constructor(private teacherService: TeacherService) { }
 
