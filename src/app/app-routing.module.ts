@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'register', component: SignupInstitutionComponent },
 
   { path: 'dashboard-institution', component: DasboardInstitutionComponent, canActivate: [AuthGuard] },
-  { path: 'list-teachers', component: ListTeachersComponent, canActivate: [AuthGuard] },
+
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 

@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/signin/signin.component';
-import { ListTeachersComponent } from './pages/institution/list-teachers/list-teachers.component';
+
 import { HomeComponent } from './pages/home/home.component';
 import { RolsComponent } from './pages/home/rols/rols.component';
 
@@ -38,7 +38,6 @@ import { DasboardInstitutionComponent } from './pages/institution/dasboard-insti
   declarations: [
     AppComponent,
     SigninComponent,
-    ListTeachersComponent,
     HomeComponent,
     NavbarHomeComponent,
     AdmissionsComponent,
