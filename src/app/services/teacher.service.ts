@@ -14,7 +14,7 @@ export class TeacherService {
     private http: HttpClient,
     private router:Router) { }
 
-    getTeachersByInstitutionId(id_institucion: string): Observable<any> {
-      return this.http.get<any>(`${this.URL}/teachers/institution/${id_institucion}`);
+    getTeachersByInstitutionId(id_institution: string): Observable<any> {
+      return this.http.get<any>(`${this.URL}/teachers/institution/${id_institution}`);
     }
 }

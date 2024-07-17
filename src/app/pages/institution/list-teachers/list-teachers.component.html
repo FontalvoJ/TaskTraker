@@ -1,1 +1,23 @@
-<p>list-teachers works!</p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Asignature</th>
+      <th>Email</th>
+      <th>Institution ID</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let teacher of teachers">
+      <td>{{ teacher.name }}</td>
+      <td>{{ teacher.asignature }}</td>
+      <td>{{ teacher.email }}</td>
+      <td>{{ teacher.id_institution }}</td>
+      <td>
+        <button (click)="editTeacher(teacher)" class="btn btn-primary">Edit</button>
+        <button (click)="deleteTeacher(teacher)" class="btn btn-danger">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

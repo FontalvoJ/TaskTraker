@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 // Components
 import { HomeComponent } from './pages/home/home.component';
 import { SigninComponent } from './auth/signin/signin.component';
-import { ListTeachersComponent } from './pages/institution/list-teachers/list-teachers.component';
+
 import { AdmissionsComponent } from './pages/home/admissions/admissions.component';
 import { AcaProgrsComponent } from './pages/home/aca-progrs/aca-progrs.component';
 import { RolsComponent } from './pages/home/rols/rols.component';
@@ -13,6 +13,7 @@ import { SignupInstitutionComponent } from './auth/signup-institution/signup-ins
 import { SignupTeacherComponent } from './auth/signup-teacher/signup-teacher.component';
 import { SignupStudentComponent } from './auth/signup-student/signup-student.component';
 import {  DasboardInstitutionComponent } from './pages/institution/dasboard-institution/dasboard-institution.component';
+import { ListTeachersComponent } from './pages/institution/list-teachers/list-teachers.component';
 import { AuthGuard } from './auth.guard';
 
 
@@ -31,7 +32,7 @@ const routes: Routes = [
   { path: 'rols', component: RolsComponent},
   { path: 'login', component: SigninComponent },
   { path: 'register', component: SignupInstitutionComponent },
-
+  { path: 'teachers', component: ListTeachersComponent },
   { path: 'dashboard-institution', component: DasboardInstitutionComponent, canActivate: [AuthGuard] },
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },

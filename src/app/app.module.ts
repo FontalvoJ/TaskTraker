@@ -27,6 +27,7 @@ import { SignupInstitutionComponent } from './auth/signup-institution/signup-ins
 import { SignupStudentComponent } from './auth/signup-student/signup-student.component';
 import { ErrorComponent } from './pages/home/error/error.component';
 import { DasboardInstitutionComponent } from './pages/institution/dasboard-institution/dasboard-institution.component';
+import { ListTeachersComponent } from './pages/institution/list-teachers/list-teachers.component';
 
 
 
@@ -48,7 +49,8 @@ import { DasboardInstitutionComponent } from './pages/institution/dasboard-insti
     SignupStudentComponent,
     ErrorComponent,
     DasboardInstitutionComponent,
-    NavbarInstitutionComponent
+    NavbarInstitutionComponent,
+    ListTeachersComponent
 
     
   ],
