@@ -54,16 +54,29 @@ export const deleteTeacherById = async (req, res) => {
 };
 
 export const getTeachersByInstitutionId = async (req, res) => {
+
     const { id_institution } = req.params;
     
     try {
-        const teachers = await Teacher.find({ id_institution });
+
+      if (!id_institution) {
+        return res.status(400).json({ success: false, message: 'Institution ID is required' });
+      }
+      
+    
+      const teachers = await Teacher.find({ id_institution });
+  
+      if (teachers.length > 0) {
         res.status(200).json({ success: true, data: teachers });
+      } else {
+        res.status(404).json({ success: false, message: 'No teachers found for this institution' });
+      }
     } catch (error) {
-        console.error(`Error fetching teachers for institution with ID ${id_institution}:`, error);
-        res.status(500).json({ success: false, message: 'Internal Server Error' });
+      console.error(`Error fetching teachers for institution with ID ${id_institution}:`, error);
+      res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
-};
+  };
+
 export default {
     getTeachers,
     getTeacherById,
