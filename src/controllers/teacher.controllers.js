@@ -54,17 +54,14 @@ export const deleteTeacherById = async (req, res) => {
 };
 
 export const getTeachersByInstitutionId = async (req, res) => {
-
     const { id_institution } = req.params;
     
     try {
-
       if (!id_institution) {
         return res.status(400).json({ success: false, message: 'Institution ID is required' });
       }
       
-    
-      const teachers = await Teacher.find({ id_institution });
+      const teachers = await Teacher.find({ id_institution }).populate('roles'); 
   
       if (teachers.length > 0) {
         res.status(200).json({ success: true, data: teachers });
@@ -76,6 +73,7 @@ export const getTeachersByInstitutionId = async (req, res) => {
       res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
   };
+  
 
 export default {
     getTeachers,
