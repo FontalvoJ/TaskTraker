@@ -1,4 +1,4 @@
-import express from 'express';2
+import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import pkg from '../package.json';
@@ -21,9 +21,19 @@ createRoles();
 app.use(morgan('dev'));
 app.use(express.json());
 
-
 // Configuramos el middleware de CORS
-app.use(cors({ origin: 'http://localhost:4200' }));
+const allowedOrigins = ['http://localhost:4200', 'https://demo-gpe-tasktraker.netlify.app'];
+app.use(cors({
+  origin: function (origin, callback) {
+    // Permitir solicitudes de origen no especificado (como solicitudes internas)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 
 // Definimos una ruta principal que devuelve la información del paquete
 app.get('/', (req, res) => {
@@ -42,8 +52,5 @@ app.use('/api/teachers', teacherRoutes);
 app.use('/api/students', studentRoutes);
 app.use('/api/institutions', institutionRoutes);
 app.use('/api/StudentProject', StudentProject);
-
-
-
 
 export default app;
