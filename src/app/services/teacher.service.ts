@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,13 @@ export class TeacherService {
       return this.http.get<any>(`${this.URL}/teachers/institution/${id_institution}`);
     }
 
-    deleteTeacherById(teacherId: string): Observable<any> {
-      return this.http.delete<any>(`${this.URL}/teachers/${teacherId}`);
+    deleteTeacherById(teacherId: string) {
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-access-token': token || ''
+      });
+  
+      return this.http.delete<any>(`${this.URL}/teachers/${teacherId}`, { headers });
     }
 }

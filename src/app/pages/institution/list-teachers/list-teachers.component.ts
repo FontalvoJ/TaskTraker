@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TeacherService } from 'src/app/services/teacher.service'; 
+import { TeacherService } from 'src/app/services/teacher.service';
 
 @Component({
   selector: 'app-list-teachers',
@@ -9,28 +9,32 @@ import { TeacherService } from 'src/app/services/teacher.service';
 export class ListTeachersComponent implements OnInit {
 
   teachers: any[] = [];
-  paginatedTeachers: any[] = []; 
+  paginatedTeachers: any[] = [];
   filteredTeachers: any[] = [];
-  currentPage: number = 1; 
-  itemsPerPage: number = 5;  
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
   searchTerm: string = '';
 
   constructor(private teacherService: TeacherService) { }
 
   ngOnInit() {
+    this.loadTeachers();
+  }
+
+  loadTeachers() {
     const institutionId = localStorage.getItem('userId');
     const role = localStorage.getItem('role');
 
-    console.log('Institution ID:', institutionId); 
+    console.log('Institution ID:', institutionId);
     console.log('Role:', role);
 
-    if (institutionId && role === 'institution') {
+    if (institutionId && (role === 'institution' || role === 'admin')) {
       this.teacherService.getTeachersByInstitutionId(institutionId).subscribe(
         (res) => {
           if (res.success) {
             this.teachers = res.data;
             this.filteredTeachers = [...this.teachers];
-            this.updatePaginatedTeachers(); 
+            this.updatePaginatedTeachers();
           } else {
             console.error('Failed to fetch teachers');
           }
@@ -65,7 +69,7 @@ export class ListTeachersComponent implements OnInit {
   }
 
   applySearch() {
-    this.filteredTeachers = this.teachers.filter(teacher => 
+    this.filteredTeachers = this.teachers.filter(teacher =>
       teacher.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
     this.currentPage = 1;
@@ -73,12 +77,30 @@ export class ListTeachersComponent implements OnInit {
   }
 
   editTeacher(teacher: any) {
-   
     console.log('Edit teacher:', teacher);
+    // Aquí podrías implementar la lógica para editar el profesor
   }
 
-  deleteTeacher(teacher: any) {
-   
-    console.log('Delete teacher:', teacher);
+  deleteTeacher(teacherId: string) {
+    if (confirm('Are you sure you want to delete this teacher?')) {
+      this.teacherService.deleteTeacherById(teacherId).subscribe(
+        (response) => {
+          console.log('Teacher deleted successfully', response);
+  
+          this.loadTeachers();
+        },
+        (error) => {
+          console.error('Error deleting teacher', error);
+          if (error.status === 403) {
+            alert('You do not have permission to delete this teacher.');
+          } else if (error.status === 404) {
+            alert('Teacher not found for deletion.');
+          } else {
+            alert('Error deleting teacher. Please try again later.');
+          }
+        }
+      );
+    }
   }
+  
 }
