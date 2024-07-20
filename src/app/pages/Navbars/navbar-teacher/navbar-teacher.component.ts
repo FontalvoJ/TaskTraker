@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 
+
 @Component({
-  selector: 'app-navbar-institution',
-  templateUrl: './navbar-institution.component.html',
-  styleUrls: ['./navbar-institution.component.css']
+  selector: 'app-navbar-teacher',
+  templateUrl: './navbar-teacher.component.html',
+  styleUrls: ['./navbar-teacher.component.css']
 })
-export class NavbarInstitutionComponent implements OnInit {
+export class NavbarTeacherComponent implements OnInit {
+
   isMenuOpen = false;
   userName: string | null = null;
 
