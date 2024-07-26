@@ -14,11 +14,13 @@ export class ListTeachersComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 5;
   searchTerm: string = '';
+  userRole: string = '';
 
   constructor(private teacherService: TeacherService) { }
 
   ngOnInit() {
     this.loadTeachers();
+    this.userRole = localStorage.getItem('role') || ''; 
   }
 
   loadTeachers() {
@@ -86,7 +88,7 @@ export class ListTeachersComponent implements OnInit {
       this.teacherService.deleteTeacherById(teacherId).subscribe(
         (response) => {
           console.log('Teacher deleted successfully', response);
-  
+
           this.loadTeachers();
         },
         (error) => {
@@ -102,5 +104,4 @@ export class ListTeachersComponent implements OnInit {
       );
     }
   }
-  
 }

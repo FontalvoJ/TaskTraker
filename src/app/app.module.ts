@@ -44,6 +44,9 @@ import { NavbarStudentComponent } from './pages/Navbars/navbar-student/navbar-st
 // Services and Guards
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor/token-interceptor.service';
+import { UpdateTeacherComponent } from './pages/teacher/update-teacher/update-teacher.component';
+import { UpdateInstitutionComponent } from './pages/institution/update-institution/update-institution.component';
+import { UpdateStudentComponent } from './pages/student/update-student/update-student.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +71,10 @@ import { TokenInterceptorService } from './services/token-interceptor/token-inte
     NavbarHomeComponent,
     NavbarInstitutionComponent,
     NavbarTeacherComponent,
-    NavbarStudentComponent
+    NavbarStudentComponent,
+    UpdateTeacherComponent,
+    UpdateInstitutionComponent,
+    UpdateStudentComponent
   ],
   imports: [
     BrowserModule,
