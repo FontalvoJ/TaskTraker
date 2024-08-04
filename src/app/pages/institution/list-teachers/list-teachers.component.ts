@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TeacherService } from 'src/app/services/teacher.service';
 
 @Component({
@@ -15,20 +16,21 @@ export class ListTeachersComponent implements OnInit {
   itemsPerPage: number = 5;
   searchTerm: string = '';
   userRole: string = '';
+  showModal: boolean = false;
+  teacherToDelete: string = '';
+  isEditModalOpen: boolean = false; // Nuevo estado para el modal de edición
+  teacherToEdit: any = {}; // Objeto del profesor que se está editando
 
-  constructor(private teacherService: TeacherService) { }
+  constructor(private teacherService: TeacherService, private router: Router) { }
 
   ngOnInit() {
     this.loadTeachers();
-    this.userRole = localStorage.getItem('role') || ''; 
+    this.userRole = localStorage.getItem('role') || '';
   }
 
   loadTeachers() {
     const institutionId = localStorage.getItem('userId');
     const role = localStorage.getItem('role');
-
-    console.log('Institution ID:', institutionId);
-    console.log('Role:', role);
 
     if (institutionId && (role === 'institution' || role === 'admin')) {
       this.teacherService.getTeachersByInstitutionId(institutionId).subscribe(
@@ -78,18 +80,36 @@ export class ListTeachersComponent implements OnInit {
     this.updatePaginatedTeachers();
   }
 
+  // Método para abrir el modal de edición
   editTeacher(teacher: any) {
-    console.log('Edit teacher:', teacher);
-    // Aquí podrías implementar la lógica para editar el profesor
+    this.teacherToEdit = { ...teacher }; // Copia los datos del profesor a editar
+    this.isEditModalOpen = true; // Abre el modal de edición
   }
 
-  deleteTeacher(teacherId: string) {
-    if (confirm('Are you sure you want to delete this teacher?')) {
-      this.teacherService.deleteTeacherById(teacherId).subscribe(
+  // Método para cerrar el modal de edición
+  closeEditModal() {
+    this.isEditModalOpen = false;
+  }
+
+  // Método para guardar los cambios del profesor
+  saveTeacher() {
+    console.log('Teacher data saved:', this.teacherToEdit);
+    // Aquí puedes implementar la lógica para guardar los cambios del profesor
+    this.closeEditModal(); // Cierra el modal después de guardar
+  }
+
+  confirmDeleteTeacher(teacherId: string) {
+    this.teacherToDelete = teacherId;
+    this.showModal = true;
+  }
+
+  deleteTeacher() {
+    if (this.teacherToDelete) {
+      this.teacherService.deleteTeacherById(this.teacherToDelete).subscribe(
         (response) => {
           console.log('Teacher deleted successfully', response);
-
           this.loadTeachers();
+          this.showModal = false;
         },
         (error) => {
           console.error('Error deleting teacher', error);
@@ -100,8 +120,13 @@ export class ListTeachersComponent implements OnInit {
           } else {
             alert('Error deleting teacher. Please try again later.');
           }
+          this.showModal = false;
         }
       );
     }
+  }
+
+  cancelDelete() {
+    this.showModal = false;
   }
 }
