@@ -18,8 +18,7 @@ export class ListTeachersComponent implements OnInit {
   userRole: string = '';
   showModal: boolean = false;
   teacherToDelete: string = '';
-  isEditModalOpen: boolean = false; // Nuevo estado para el modal de edición
-  teacherToEdit: any = {}; // Objeto del profesor que se está editando
+  
 
   constructor(private teacherService: TeacherService, private router: Router) { }
 
@@ -78,24 +77,6 @@ export class ListTeachersComponent implements OnInit {
     );
     this.currentPage = 1;
     this.updatePaginatedTeachers();
-  }
-
-  // Método para abrir el modal de edición
-  editTeacher(teacher: any) {
-    this.teacherToEdit = { ...teacher }; // Copia los datos del profesor a editar
-    this.isEditModalOpen = true; // Abre el modal de edición
-  }
-
-  // Método para cerrar el modal de edición
-  closeEditModal() {
-    this.isEditModalOpen = false;
-  }
-
-  // Método para guardar los cambios del profesor
-  saveTeacher() {
-    console.log('Teacher data saved:', this.teacherToEdit);
-    // Aquí puedes implementar la lógica para guardar los cambios del profesor
-    this.closeEditModal(); // Cierra el modal después de guardar
   }
 
   confirmDeleteTeacher(teacherId: string) {
